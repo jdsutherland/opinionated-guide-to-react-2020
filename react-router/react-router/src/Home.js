@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, Outlet } from 'react-router-dom'
 
 const Home = () => {
   const navigate = useNavigate();
@@ -20,6 +20,7 @@ const Home = () => {
         />
         <button disabled={!user}>Go to that user</button>
       </form>
+      <Outlet />
     </>
   )
 };

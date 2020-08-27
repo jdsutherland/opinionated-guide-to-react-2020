@@ -7,8 +7,9 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 ReactDOM.render(
   <BrowserRouter>
     <Routes>
-      <Home path="/" />
-      <User path="user/:id" />
+      <Home path="/">
+        <User path="user/:id" />
+      </Home>
       <Route path="*" element={<p>Sorry, nothing here</p>} />
     </Routes>
   </BrowserRouter>,
