@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate, Outlet } from 'react-router-dom'
+import { Link, useNavigate, Outlet, NavLink } from 'react-router-dom'
 
 const Home = () => {
   const navigate = useNavigate();
@@ -7,6 +7,9 @@ const Home = () => {
 
   return (
     <>
+      <NavLink activeStyle={{ color: 'white' }} to="/">
+        Go Home
+      </NavLink>
       <Link to="user/react-router">Go to the React Router user</Link>
       <form onSubmit={e => {
         e.preventDefault();
