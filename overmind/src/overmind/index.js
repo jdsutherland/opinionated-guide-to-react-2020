@@ -5,7 +5,12 @@ export const config = {
     terms: ["SSR", "PWA"],
   },
   actions: {
-    // anything to transform the state
+    addTerm({ state }, term) {
+      state.terms = [term, ...state.terms];
+    },
+    removeTerm({ state }, indexToDelete) {
+      state.terms = state.terms.filter((_, idx) => indexToDelete !== idx)
+    },
   },
 };
 
