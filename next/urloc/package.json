@@ -8,8 +8,10 @@
     "start": "next start"
   },
   "dependencies": {
-    "next": "9.5.2",
-    "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "axios": "0.19.2",
+    "next": "latest",
+    "node-fetch": "2.6.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   }
 }
