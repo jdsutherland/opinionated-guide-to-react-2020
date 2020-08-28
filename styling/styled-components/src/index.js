@@ -1,17 +1,23 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
+import { ThemeProvider } from "styled-components";
+import { theme, Style } from "./utils/styles";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+function App() {
+  const [word, setWord] = useState("");
+  return (
+    <ThemeProvider theme={theme}>
+      <>
+        <Style />
+        <div className="App">
+          <h1>Write "React"</h1>
+          <input value={word} onChange={(e) => setWord(e.target.value)} />
+          <h2 react={word.toLowerCase() === "react"}>{word}</h2>
+        </div>
+      </>
+    </ThemeProvider>
+  );
+}
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
