@@ -1,5 +1,5 @@
 import React from "react";
-import { ThemeProvider, CSSReset, Box } from "@chakra-ui/core";
+import { ThemeProvider, CSSReset, Box, Select } from "@chakra-ui/core";
 
 export default function App() {
   return (
@@ -11,8 +11,13 @@ export default function App() {
         margin='50px auto'
         textAlign='center'
       >
-        <h1>Hello CodeSandbox</h1>
-        <h2>Start editing to see some magic happen!</h2>
+        <Select
+          placeholder='Berlin Teams'
+          onChange={event => console.log(event.target.value)}
+        >
+          <option value="union">Union Berlin</option>
+          <option value="hertha">Hertha Berlin</option>
+        </Select>
       </Box>
     </ThemeProvider>
   );
