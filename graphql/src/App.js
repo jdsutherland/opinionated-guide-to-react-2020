@@ -21,7 +21,12 @@ const ADD_PERSON = gql`
 
 export default function App() {
   const { loading, data } = useQuery(PEOPLE);
-  const [AddPersonMutation, { loading: loadingMutation }] = useMutation(ADD_PERSON);
+  const [AddPersonMutation, { loading: loadingMutation }] = useMutation(
+    ADD_PERSON,
+    {
+      refetchQueries: ['AllPeople'],
+    }
+  );
   const [name, setName] = useState('')
 
   const addPerson = (e) => {
