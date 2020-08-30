@@ -1,0 +1,9 @@
+@keyframes react-icon {
+  100% {
+    transform: rotate(900deg);
+  }
+}
+
+.react-icon {
+  animation: react-icon 2s infinite;
+}
