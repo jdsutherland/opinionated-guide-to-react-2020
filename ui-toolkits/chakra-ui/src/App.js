@@ -1,5 +1,6 @@
 import React from "react";
 import { ThemeProvider, CSSReset, Box, Select } from "@chakra-ui/core";
+import Modal from './components/Modal';
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
           <option value="union">Union Berlin</option>
           <option value="hertha">Hertha Berlin</option>
         </Select>
+        <Modal />
       </Box>
     </ThemeProvider>
   );
