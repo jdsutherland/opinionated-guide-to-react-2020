@@ -1,34 +1,15 @@
-import React from 'react';
-import './App.css';
-import { AirportContext } from "./AirportContext";
+import React, { useRef, useEffect } from "react";
 
 export default function App() {
-  const { state, dispatch } = React.useContext(AirportContext);
+  const button = useRef(null);
+
+  useEffect(() => {
+    button.current.click();
+  }, []);
+
   return (
-    <div className="App">
-      <h1>Worst Airports in Europe</h1>
-      <ul>
-        {state.airports.map(airport => (
-          <li key={airport.name}>
-            {airport.name}
-            {airport.visited ? (
-              <button
-                onClick={() => dispatch({ type: 'toggleVisited', value: airport.id })}>
-                <span role="img" aria-label="remove visited">
-                  ❌
-                </span>
-              </button>
-            ): (
-              <button onClick={() => dispatch({ type: 'toggleVisited', value: airport.id })}>
-                <span role="img" aria-label="visited">
-                  ✅
-                </span>
-              </button>
-            )}
-            <img width='300' src={airport.photo} alt={airport.name}/>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <button ref={button} onClick={() => alert('clicked')}>
+      A button
+    </button>
   );
 }
