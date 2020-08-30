@@ -3,15 +3,29 @@ import './App.css';
 import { AirportContext } from "./AirportContext";
 
 export default function App() {
-  const { airports, removeAirport } = React.useContext(AirportContext);
+  const { state, dispatch } = React.useContext(AirportContext);
   return (
     <div className="App">
       <h1>Worst Airports in Europe</h1>
       <ul>
-        {airports.map(airport => (
-          <li>
+        {state.airports.map(airport => (
+          <li key={airport.name}>
             {airport.name}
-            <button onClick={() => removeAirport(airport.name)}>x</button>
+            {airport.visited ? (
+              <button
+                onClick={() => dispatch({ type: 'toggleVisited', value: airport.id })}>
+                <span role="img" aria-label="remove visited">
+                  ❌
+                </span>
+              </button>
+            ): (
+              <button onClick={() => dispatch({ type: 'toggleVisited', value: airport.id })}>
+                <span role="img" aria-label="visited">
+                  ✅
+                </span>
+              </button>
+            )}
+            <img width='300' src={airport.photo} alt={airport.name}/>
           </li>
         ))}
       </ul>

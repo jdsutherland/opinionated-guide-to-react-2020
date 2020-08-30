@@ -1,18 +1,29 @@
-import React, { useState, createContext } from 'react'
-import airportList from "./data";
+import React, { useReducer, createContext } from 'react'
+import airports from "./data";
 
 export const AirportContext = createContext(null);
 
-export default ({ children }) => {
-  const [airports, setAirports] = useState(airportList);
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'toggleVisited':
+      return {
+        airports: state.airports.map(airport => {
+          return (airport.id === action.value)
+            ? {...airport, visited: !airport.visited}
+            : airport;
+        })
+      }
+    default:
+      return state
+  }
+};
 
-  const store = {
-    airports: airports,
-    removeAirport: (name) =>
-      setAirports((a) => a.filter((airport) => airport.name !== name)),
-  };
+export default ({ children }) => {
+  const [state, dispatch] = useReducer(reducer, {airports});
 
   return (
-    <AirportContext.Provider value={store}>{children}</AirportContext.Provider>
+    <AirportContext.Provider value={{ state, dispatch }}>
+      {children}
+    </AirportContext.Provider>
   );
 };
