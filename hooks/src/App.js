@@ -9,16 +9,32 @@ const Name = ({ name }) => {
   return <h1> Hello {name}</h1>;
 };
 
-const App = () => {
-  const [name, setName] = useState("Jane Doe");
-  return (
-    <div className="App">
-      <Name name={name} />
-      <h2>Change the name</h2>
-      <button onClick={() => setName("CodeSandbox")}>CodeSandbox</button>
-      <button onClick={() => setName("John Doe")}>John Doe</button>
-    </div>
-  );
-};
+export default function App() {
+  const [characters, setCharacters] = useState([]);
 
-export default App;
+  const getCharacters = async () => {
+    const data = await fetch(
+      `https://rickandmortyapi.com/api/character/?page=1`
+    );
+    const characters = await data.json();
+    return characters.results;
+  };
+
+  useEffect(() => {
+    getCharacters().then((rsp) => setCharacters(rsp));
+  }, []);
+
+  return (
+    <main className="App">
+      <h1>Rick and Morty Characters</h1>
+      <ul>
+        {characters.map((character) => (
+          <li key={character.id}>
+            <img src={character.image} alt={character.name} />
+            {character.name}
+          </li>
+        ))}
+      </ul>
+    </main>
+  );
+}
