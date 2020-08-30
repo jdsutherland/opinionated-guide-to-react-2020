@@ -1,24 +1,37 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState } from "react";
+import useLocalStorage from "./useLocalStorage";
 
-const App = () => {
-  const [num, setNum] = useState(0);
-  const [plusOne, setPlusOne] = useState(0);
+export default function App() {
+  const [movies, setMovies, clearMovies] = useLocalStorage("movies");
+  const [newMovie, setNewMovie] = useState("");
 
-  const add1 = useCallback((x) => {
-    console.log("here", x);
-    return x + 1;
-  }, [])
+  const addMovie = (e) => {
+    e.preventDefault();
+    setMovies((movies || []).concat(newMovie));
+    setNewMovie("");
+  };
 
-  useEffect(() => {
-    setPlusOne(add1(num));
-  }, [num, add1]);
   return (
-    <>
-      <h2>{num}</h2>
-      <h3>{plusOne}</h3>
-      <button onClick={() => setNum(num + 1)}>+</button>
-    </>
-  );
-};
+    <main>
+      <h1>Movies to see</h1>
+      <form onSubmit={addMovie}>
+        <input
+          placeholder="add a movie"
+          onChange={(e) => setNewMovie(e.target.value)}
+          value={newMovie}
+        />
+      </form>
+      <ul>
+        {movies ? (
+          movies.map((movie) => <li key={movie}>{movie}</li>)
+        ) : (
+          <small>There has to be something you want to see</small>
+        )}
+      </ul>
 
-export default App;
+      <button onClick={clearMovies}>
+        Remove all Movies
+      </button>
+    </main>
+  );
+}
