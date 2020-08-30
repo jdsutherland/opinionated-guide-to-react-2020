@@ -1,26 +1,40 @@
 import React from "react";
-import { ThemeProvider, CSSReset, Box, Select } from "@chakra-ui/core";
+import {
+  ThemeProvider,
+  CSSReset,
+  Box,
+  ColorModeProvider,
+} from "@chakra-ui/core";
 import Modal from './components/Modal';
+import Dropdown from './components/Dropdown';
 
 export default function App() {
   return (
     <ThemeProvider>
-      <CSSReset />
-      <Box
-        maxWidth="80%"
-        width='600px'
-        margin='50px auto'
-        textAlign='center'
-      >
-        <Select
-          placeholder='Berlin Teams'
-          onChange={event => console.log(event.target.value)}
-        >
-          <option value="union">Union Berlin</option>
-          <option value="hertha">Hertha Berlin</option>
-        </Select>
-        <Modal />
-      </Box>
+      <ColorModeProvider>
+        <>
+          <CSSReset />
+
+          <Box
+            width={200}
+            height={200}
+            margin="30px auto"
+            backgroundColor="tomato"
+            borderRadius="50%"
+            borderColor="gray"
+            borderWidth={10}
+          />
+          <Box
+            maxWidth="80%"
+            width="600px"
+            margin="50px auto"
+            textAlign="center"
+          >
+            <Dropdown />
+            <Modal />
+          </Box>
+        </>
+      </ColorModeProvider>
     </ThemeProvider>
   );
 }

@@ -8,14 +8,20 @@ import {
   ModalBody,
   ModalCloseButton,
   Button,
-  useDisclosure,
+  useColorMode,
+  useDisclosure
 } from "@chakra-ui/core";
 
 export default function ModalComponent() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { colorMode, toggleColorMode } = useColorMode();
+
   return (
     <>
-      <Button mt='3' onClick={onOpen}>
+      <Button mt="3" onClick={toggleColorMode}>
+        Toggle {colorMode === "light" ? "Dark" : "Light"}
+      </Button>
+      <Button mt="3" onClick={onOpen}>
         Open Modal
       </Button>
 
