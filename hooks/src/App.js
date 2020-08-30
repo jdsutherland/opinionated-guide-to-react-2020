@@ -1,22 +1,31 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 
-export default function App() {
-  const [count, setCount] = useState(0)
-  const button = useRef(null);
+function fibonacci(x) {
+  console.log("here");
+  if (x <= 0) return 0;
+  if (x === 1) return 1;
+  return fibonacci(x - 1) + fibonacci(x - 2);
+}
 
-  const fakeClick = () => {
-    button.current.click();
-  };
+const App = () => {
+  const [number, setNumber] = useState(10);
+  const [isGreen, setIsGreen] = useState(true);
+  const fib = fibonacci(number);
 
   return (
     <>
-      <button ref={button} onClick={fakeClick}>
-        This button triggers a click somewhere
+      <button
+        onClick={() => setIsGreen(!isGreen)}
+        style={{ background: isGreen ? "#01FF70" : "#B10DC9" }}
+      >
+        useMemo Example
       </button>
-      Count: <span>{count}</span>
-      <button ref={button} onClick={() => setCount(count + 1)}>
-        +
-      </button>
+      <h2>
+        Fibonacci of {number} is {fib}
+      </h2>
+      <button onClick={() => setNumber(number + 1)}>+</button>
     </>
   );
-}
+};
+
+export default App;
