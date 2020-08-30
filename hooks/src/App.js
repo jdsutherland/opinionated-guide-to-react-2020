@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 
 function fibonacci(x) {
   console.log("here");
@@ -10,7 +10,7 @@ function fibonacci(x) {
 const App = () => {
   const [number, setNumber] = useState(10);
   const [isGreen, setIsGreen] = useState(true);
-  const fib = fibonacci(number);
+  const fib = useMemo(() => fibonacci(number), [number]);
 
   return (
     <>
